@@ -53,8 +53,6 @@ cmds process(message message) {
     return cmds::error;
 }
 
-
-
 int main() {
     cout << "Server started!\n";
     while (true) {

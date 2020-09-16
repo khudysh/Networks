@@ -21,7 +21,7 @@ struct message
 void writemessage(message cmd)
 {
     ofstream f("f1", ostream::binary | ostream::app);
-    f.write((char*)&cmd, sizeof(cmd));
+    f.write((char *)&cmd, sizeof(cmd));
     f.close();
 }
 
@@ -30,7 +30,7 @@ cmds read_answer(int new_size)
     ifstream f("f2", ostream::binary | ostream::in);
     f.seekg(new_size, ostream::beg);
     cmds result;
-    f.read((char*)&result, sizeof(result));
+    f.read((char *)&result, sizeof(result));
     f.close();
     return result;
 }
