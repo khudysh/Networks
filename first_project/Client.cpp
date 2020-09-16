@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <ctime>
 
 using namespace std;
 
@@ -18,7 +19,7 @@ struct message
     char command[100];
 };
 
-void writemessage(message cmd)
+void write_cmd(message cmd)
 {
     ofstream f("f1", ostream::binary | ostream::app);
     f.write((char *)&cmd, sizeof(cmd));
@@ -37,7 +38,7 @@ cmds read_answer(int new_size)
 
 int lst_size_check()
 {
-    ifstream file("f2", ios::binary | ios::ate);
+    ifstream file("f2", ostream::binary | ostream::ate);
     file.seekg(0, ostream::end);
     int file_size = file.tellg();
     file.close();
@@ -50,7 +51,23 @@ void write_to_adm()
     message message;
     cin.getline(message.command, sizeof(message.command));
     int new_size = lst_size_check();
-    writemessage(message);
+    write_cmd(message);
+}
+
+void todays_time_date()
+{
+    // Текущие дата/время используемой системы
+    time_t now = time(0);
+    // Преобразуем в структуру tm для локальной временной зоны
+    tm *localtm = localtime(&now);
+    cout << "Local date and time: " << asctime(localtm) << endl;
+}
+
+void close_ses()
+{
+    ofstream file("f1", ostream::trunc);
+    file.close();
+    exit(0);
 }
 
 int main()
@@ -65,16 +82,16 @@ int main()
         cin.getline(message.command, sizeof(message.command));
 
         int new_size = lst_size_check();
-        writemessage(message);
+        write_cmd(message);
 
-        while (true)
+        while ("check")
         {
             int newSize = lst_size_check();
             if (newSize > new_size)
                 break;
         }
-        cmds response = read_answer(new_size);
 
+        cmds response = read_answer(new_size);
         switch (response)
         {
         case cmds::greet:
@@ -86,12 +103,13 @@ int main()
         case cmds::error:
             cout << "Undefined command, please try again!\n";
             break;
-            /*     case cmds::greet:
-                cout << "Hello user!\n";
-                break;
-            case cmds::greet:
-                cout << "Hello user!\n";
-                break; */
+        case cmds::date_time:
+            todays_time_date();
+            break;
+        case cmds::close_session:
+            cout << "See you!\n";
+            close_ses();
+            break;
         }
     }
     system("pause");
