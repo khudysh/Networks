@@ -4,7 +4,8 @@
 
 using namespace std;
 
-enum cmds {
+enum cmds
+{
     greet,
     admin_msg,
     user_msg,
@@ -13,60 +14,78 @@ enum cmds {
     error
 };
 
-struct message {
+struct message
+{
     char command[100];
 };
 
-message readStudent(int new_size) {
+message read_command(int new_size)
+{
     ifstream f("f1", ostream::binary | ostream::in);
-    f.seekg(new_size);
+    f.seekg(new_size, ostream::beg);
     message result;
-    f.read((char*)& result, sizeof(result));
+    f.read((char *)&result, sizeof(result));
     f.close();
     return result;
 }
 
-void writeScholarship(cmds data) {
+void write_result(cmds data)
+{
     ofstream f("f2", ostream::binary | ostream::app);
-    f.write((char*)& data, sizeof(data));
+    f.write((char *)&data, sizeof(data));
     f.close();
 }
 
-/* void createFiles() {
-    ofstream f1("f1", ostream::binary);
-    ofstream f2("f2", ostream::binary);
-    f1.close();
-    f2.close();
-} */
-
-int lst_size_check() {
+int lst_size_check()
+{
     ifstream f("f1", ostream::binary);
     f.seekg(0, ostream::end);
     return f.tellg();
 }
 
-cmds process(message message) {
+cmds processing(message message)
+{
     if (strlen(message.command) < 2 && message.command[0] == '1')
+    {
+        cout << "greet: ";
         return cmds::greet;
+    }
     if (strlen(message.command) < 2 && message.command[0] == '2')
+    {
+        cout << "admin_msg: ";
         return cmds::admin_msg;
+    }
+    if (strlen(message.command) < 2 && message.command[0] == '3')
+    {
+        cout << "date_time: ";
+        return cmds::date_time;
+    }
+    if (strlen(message.command) < 2 && message.command[0] == '4')
+    {
+        cout << "close_session: ";
+        return cmds::close_session;
+    }
     return cmds::error;
 }
 
-int main() {
-    cout << "Server started!\n";
-    while (true) {
+int main()
+{
+
+    cout << "Server started!\nThere are the received commands\n";
+    while ("connect")
+    {
         int new_size = lst_size_check();
-        while (true)
+
+        while ("check")
         {
             int newSize = lst_size_check();
             if (newSize > new_size)
                 break;
         }
-        message message = readStudent(new_size);
-        cout << message.command << " ";
-        cout << endl;
-        cmds result = process(message);
-        writeScholarship(result);
+
+        message message = read_command(new_size);
+        cmds result = processing(message);
+        cout << message.command << "\n";
+        write_result(result);
     }
 }
