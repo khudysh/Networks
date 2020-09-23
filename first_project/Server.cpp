@@ -25,7 +25,7 @@ message read_command(int new_size)
     ifstream f("f1", ostream::binary | ostream::in);
     f.seekg(new_size, ostream::beg);
     message result;
-    f.read((char *)&result, sizeof(result));
+    f.read((char*)&result, sizeof(result));
     f.close();
     return result;
 }
@@ -33,7 +33,7 @@ message read_command(int new_size)
 void write_result(cmds data)
 {
     ofstream f("f2", ostream::binary | ostream::app);
-    f.write((char *)&data, sizeof(data));
+    f.write((char*)&data, sizeof(data));
     f.close();
 }
 

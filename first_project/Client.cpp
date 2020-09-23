@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <ctime>
-
+#pragma warning(disable : 4996) //_CRT_SECURE_NO_WARNINGS
 using namespace std;
 
 enum cmds
@@ -23,7 +23,7 @@ struct message
 void write_cmd(message cmd)
 {
     ofstream f("f1", ostream::binary | ostream::app);
-    f.write((char *)&cmd, sizeof(cmd));
+    f.write((char*)&cmd, sizeof(cmd));
     f.close();
 }
 
@@ -32,7 +32,7 @@ cmds read_answer(int new_size)
     ifstream f("f2", ostream::binary | ostream::in);
     f.seekg(new_size, ostream::beg);
     cmds result;
-    f.read((char *)&result, sizeof(result));
+    f.read((char*)&result, sizeof(result));
     f.close();
     return result;
 }
@@ -61,7 +61,7 @@ void todays_time_date()
     // Текущие дата/время используемой системы
     time_t now = time(0);
     // Преобразуем в структуру tm для локальной временной зоны
-    tm *localtm = localtime(&now);
+    tm* localtm = localtime(&now);
     cout << "Local date and time: " << asctime(localtm) << endl;
 }
 
