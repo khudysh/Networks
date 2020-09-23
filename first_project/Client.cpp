@@ -46,11 +46,12 @@ int lst_size_check()
     return file_size;
 }
 
-void write_to_adm()
+void write_to_adm(int userID)
 {
     cout << "Ok, now you can write to admin:\n";
     message message;
     cin.getline(message.command, sizeof(message.command));
+    message.id = userID;
     int new_size = lst_size_check();
     write_cmd(message);
 }
@@ -73,10 +74,12 @@ void close_ses()
 
 int main()
 {
+    srand(time(0));
     cout << "You're in CommandService, Welcome!\n\n";
     cout << "List of command:\n\n 1) Greetings: (1)\n 2) Write to admin: (2)\n 3) Today's date and time: (3)\n 4) Close session: (4)\n";
     message message;
-    message.id = rand() % 11;
+    message.id = rand() % 101;
+    int userID = message.id;
 
     while ("connect")
     {
@@ -100,7 +103,7 @@ int main()
             cout << "Hello user!\n";
             break;
         case cmds::admin_msg:
-            write_to_adm();
+            write_to_adm(userID);
             break;
         case cmds::error:
             cout << "Undefined command, please try again!\n";
@@ -114,10 +117,5 @@ int main()
             break;
         }
     }
-<<<<<<< HEAD:Client.cpp
-}
-
-=======
     system("pause");
 }
->>>>>>> 24c2a38746ccd8d5bd22daeaac630082f669134f:first_project/Client.cpp
