@@ -2,3 +2,5 @@
 *.pdf
 examples/
 *.txt
+*.md
+.gitlab-ci.yml
