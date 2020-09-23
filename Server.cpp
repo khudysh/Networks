@@ -17,6 +17,7 @@ enum cmds
 struct message
 {
     char command[100];
+    int id;
 };
 
 message read_command(int new_size)
@@ -88,6 +89,7 @@ int main()
         message message = read_command(new_size);
         cmds result = processing(message);
         cout << message.command << "\n";
+        cout << message.id << "\n";
         write_result(result);
     }
 }

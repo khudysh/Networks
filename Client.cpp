@@ -17,6 +17,7 @@ enum cmds
 struct message
 {
     char command[100];
+    int id;
 };
 
 void write_cmd(message cmd)
@@ -75,6 +76,7 @@ int main()
     cout << "You're in CommandService, Welcome!\n\n";
     cout << "List of command:\n\n 1) Greetings: (1)\n 2) Write to admin: (2)\n 3) Today's date and time: (3)\n 4) Close session: (4)\n";
     message message;
+    message.id = rand() % 11;
 
     while ("connect")
     {
@@ -112,5 +114,5 @@ int main()
             break;
         }
     }
-    system("pause");
 }
+
