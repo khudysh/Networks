@@ -1,4 +1,8 @@
 *.exe
 f1
 f2
-/Networks
+/1_*
+!/first_project
+*.png
+*.pptx
+*.docx
