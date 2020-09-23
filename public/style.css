@@ -374,16 +374,22 @@ nav a:hover {
         display: flex;
         flex-direction: column;
         order: 1;
+        width: 100%;
+        padding: 0;
     }
     .block_2 {
         display: flex;
         flex-direction: column;
         order: 2;
+        width: 100%;
+        padding: 0;
     }
     .block_3 {
         display: flex;
         flex-direction: column;
         order: 4;
+        width: 100%;
+        padding: 0;
     }
     .block_4 {
         padding: 0;
