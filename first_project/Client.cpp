@@ -114,5 +114,10 @@ int main()
             break;
         }
     }
+<<<<<<< HEAD:Client.cpp
 }
 
+=======
+    system("pause");
+}
+>>>>>>> 24c2a38746ccd8d5bd22daeaac630082f669134f:first_project/Client.cpp
