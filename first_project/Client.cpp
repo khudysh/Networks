@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include <iostream>
 #include <fstream>
 #include <ctime>
@@ -9,13 +10,14 @@ using namespace std;
 const int ID_LENGTH = 10;
 char ID[ID_LENGTH];
 
-	char alphabet[52] = { 'a', 'b', 'c', 'd', 'e', 'f', 'g',
-'h', 'i', 'j', 'k', 'l', 'm', 'n',
-'o', 'p', 'q', 'r', 's', 't', 'u',
-'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G',
-'H', 'I', 'J', 'K', 'L', 'M', 'N',
-'O', 'P', 'Q', 'R', 'S', 'T', 'U',
-'V', 'W', 'X', 'Y', 'Z' };
+char alphabet[52] = { 'a', 'b', 'c', 'd', 'e', 'f', 'g',
+						'h', 'i', 'j', 'k', 'l', 'm', 'n',
+						'o', 'p', 'q', 'r', 's', 't', 'u',
+						'v', 'w', 'x', 'y', 'z', 'A', 'B',
+						'C', 'D', 'E', 'F', 'G','H', 'I', 
+						'J', 'K', 'L', 'M', 'N','O', 'P',
+						'Q', 'R', 'S', 'T', 'U','V', 'W',
+						'X', 'Y', 'Z' };
 
 enum cmds
 {
@@ -78,15 +80,15 @@ void todays_time_date()
 
 void close_ses()
 {
-	ofstream file("f1", ostream::trunc);
+	ofstream file(ID, ostream::trunc);
 	file.close();
 	exit(0);
 }
 
 void get_id() {
 	srand(char(time(0)));
-    for (int i = 0; i < ID_LENGTH; i++)
-        ID[i] = alphabet[rand()%52];
+	for (int i = 0; i < ID_LENGTH - 1; i++)
+		ID[i] = alphabet[rand() % 52];
 }
 
 int main()
@@ -94,10 +96,12 @@ int main()
 	srand(time(0));
 	get_id();
 	cout << ID << "\n";
+	ofstream f(ID);
+	f.close();
 	cout << "You're in CommandService, Welcome!\n\n";
 	cout << "List of command:\n\n 1) Greetings: (1)\n 2) Write to admin: (2)\n 3) Today's date and time: (3)\n 4) Close session: (4)\n";
 	message message;
-	strcpy(message.id, ID);
+	strcpy_s(message.id, ID);
 	while ("connect")
 	{
 		cout << "\nEnter your command:\n$ ";
