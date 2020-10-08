@@ -1,7 +1,7 @@
+#include "stdafx.h"
 #include <iostream>
 #include <fstream>
 #include <windows.h>
-
 using namespace std;
 
 const int ID_LENGTH = 10;
@@ -74,6 +74,8 @@ cmds processing(message message)
 
 int main()
 {
+	ofstream f("f1");
+	f.close();
 	cout << "Server started!\nThere are the received commands\n";
 	while ("connect")
 	{
@@ -87,7 +89,7 @@ int main()
 		}
 
 		message message = read_command(new_size);
-		strcpy(ID, message.id);
+		strcpy_s(ID, message.id);
 		cmds result = processing(message);
 		cout << message.command << "\n";
 		cout << "Client id: " << ID << "\n--------------\n";
