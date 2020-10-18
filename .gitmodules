@@ -7,3 +7,5 @@
 [submodule "6"]
 	path = 6
 	url = https://gitlab.com/khudysh/web6.git
+[submodule "./6"]
+	url = https://gitlab.com/khudysh/web6.git
