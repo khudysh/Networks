@@ -1,3 +1,4 @@
+//#include "stdafx.h"
 #include <iostream>
 #include <fstream>
 #include <windows.h>
@@ -100,4 +101,3 @@ int main()
 		cout << "Client id: " << ID << "\n--------------\n";
 		write_result(result);
 	}
-}
