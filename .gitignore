@@ -3,6 +3,8 @@ f1
 f2
 /1_*
 !/first_project
+!/second_project
+!/third_project
 *.png
 *.pptx
 *.docx
